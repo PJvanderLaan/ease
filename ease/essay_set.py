@@ -94,7 +94,9 @@ class EssaySet(object):
             # Tokenize text
             self._tokens.append(nltk.word_tokenize(self._clean_text[len(self._clean_text) - 1]))
             # Part of speech tag text
-            self._pos.append(nltk.pos_tag(self._clean_text[len(self._clean_text) - 1].split(" ")))
+            cleaned_text_to_tag = self._clean_text[len(self._clean_text) - 1].split(" ")
+            cleaned_text_to_tag = list(filter(lambda x: x != '', cleaned_text_to_tag))
+            self._pos.append(nltk.pos_tag(cleaned_text_to_tag))
             self._generated.append(essay_generated)
             # Stem spell corrected text
             porter = nltk.PorterStemmer()
